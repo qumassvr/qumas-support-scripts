@@ -13,7 +13,7 @@ function Stop-ServiceWithTimeout ([string] $name, [int] $timeoutSeconds) {
     if ($svc -eq $null) 
     { 
         Write-Error "The Service Name is not $($name)"
-        return $false 
+        exit
     }
 
     if ($svc.Status -eq [ServiceProcess.ServiceControllerStatus]::Stopped) 
@@ -32,7 +32,7 @@ function Stop-ServiceWithTimeout ([string] $name, [int] $timeoutSeconds) {
             Write-Warning "Terminating process $($ProcessName)"
             Stop-Process -Name $ProcessName -Force
 
-            sleep -Seconds 30    
+            sleep -Seconds 30
         }
     }
 
